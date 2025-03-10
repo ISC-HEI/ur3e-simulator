@@ -1,5 +1,9 @@
 # ISCoin-simulator
 
+|![Screenshot](./img/iscoin_sim_viz.png "Example trajectory visualization")|
+|:--:|
+|*Example trajectory visualization*|
+
 ## Setup
 
 See [instructions](./.docker/README.md) to build or download the containerized `iscoin_simulator`.
@@ -30,7 +34,7 @@ As an example, run the following command from the new terminal window to simulat
 ros2 run iscoin_driver demo.py
 ```
 
-The trajectories to be simulated are saved as `json` in the `iscoin_driver/config` directory. Custom trajectories can be passed to the demo script in the followin manner:
+The trajectories to be simulated are saved as `json` in the `iscoin_driver/config` directory. Custom trajectories can be passed to the demo script in the following manner:
 
 ```bash
 ros2 run iscoin_driver demo.py --ros-args -p traj:=<path-to>/custom_traj.json
