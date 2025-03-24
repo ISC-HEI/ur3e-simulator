@@ -41,3 +41,27 @@ ros2 run iscoin_driver demo.py --ros-args -p traj:=<path-to>/custom_traj.json
 ```
 
 To quit the simulator, close the window or use `CTRL+C` in the corresponding terminal.
+
+## Inverse kinematics
+
+The inverse kinematics library is based on [ur_ikfast](https://github.com/cambel/ur_ikfast/tree/master) which has been extended to support the `iscoin` robot (i.e., UR3e + Hand-e). The library can be invoked directly from Python code in the docker environment.
+
+```python
+from ur_ikfast import ur_kinematics
+
+iscoin_arm = ur_kinematics.URKinematics('iscoin')
+
+joint_angles = [-3.1, -1.6, 1.6, -1.6, -1.6, 0.]  # in radians
+print("joint angles", joint_angles)
+
+pose_quat = iscoin_arm.forward(joint_angles)
+pose_matrix = iscoin_arm.forward(joint_angles, 'matrix')
+
+print("forward() quaternion \n", pose_quat)
+print("forward() matrix \n", pose_matrix)
+
+# print("inverse() all", iscoin_arm.inverse(pose_quat, True))
+print("inverse() one from quat", iscoin_arm.inverse(pose_quat, False, q_guess=joint_angles))
+
+print("inverse() one from matrix", iscoin_arm.inverse(pose_matrix, False, q_guess=joint_angles))
+```
